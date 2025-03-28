@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Presenças Escolar</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="menu-lateral">
+      <div class="menu-header">
+        <h2>Salas</h2>
+        <button id="btn-info" class="btn-info">?</button>
+      </div>
+      <ul id="lista-salas"></ul>
+      <form id="form-nova-sala" class="form-sala">
+        <input type="text" id="nome-sala" placeholder="Nome da Turma" required>
+        <button type="submit">Criar Turma</button>
+      </form>
+      <button id="btn-exportar" class="btn-exportar">Exportar Dados</button>
+    </aside>
+
+    <main class="conteudo-principal">
+      <h1 id="titulo-sala">Selecione uma sala</h1>
+      
+      <div class="qr-section">
+        <button id="btn-abrir-qr" class="btn-qr">
+          <span class="qr-icon">📷</span> Abrir Leitor de QR Code
+        </button>
+        <div id="qr-scanner-container">
+          <div id="qr-reader"></div>
+          <button id="btn-fechar-qr" class="btn-fechar-qr" title="Fechar leitor">×</button>
+        </div>
+        <div id="qr-fallback">
+          <p class="fallback-text">Não foi possível acessar a câmera. Como alternativa:</p>
+          <input type="file" id="qr-file-input" accept="image/*">
+          <label for="qr-file-input" class="btn-qr btn-upload">
+            <span class="upload-icon">📁</span> Selecionar imagem do QR Code
+          </label>
+        </div>
+      </div>
+      
+      <div class="aluno-section">
+        <form id="form-novo-aluno" class="form-aluno">
+          <input type="text" id="nome-aluno" placeholder="Nome do Aluno" required>
+          <button type="submit">Adicionar Aluno</button>
+        </form>
+        
+        <form id="form-importar-alunos" class="form-importar">
+          <div class="file-input-wrapper">
+            <input type="file" id="arquivo-csv" accept=".csv" required>
+            <label for="arquivo-csv" class="file-label">
+              <span class="file-icon">📄</span> Selecionar arquivo CSV
+            </label>
+          </div>
+          <button type="submit">Importar Alunos</button>
+          <p class="instrucao">*Arquivo CSV com nomes dos alunos, um por linha</p>
+        </form>
+      </div>
+
+      <div id="lista-alunos" class="lista-alunos"></div>
+    </main>
+  </div>
+
+  <div id="feedback" class="feedback"></div>
+  
+  <div id="modal-info" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Como usar o sistema</h3>
+      <ol>
+        <li>Crie uma turma no menu lateral</li>
+        <li>Selecione a turma desejada</li>
+        <li>Adicione alunos manualmente ou importe uma lista</li>
+        <li>Use o leitor de QR Code para marcar presenças</li>
+        <li>Exporte os dados quando necessário</li>
+      </ol>
+      <h4>Formato do QR Code:</h4>
+      <p><code>aluno:Nome Completo;sala:Nome da Turma</code></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
